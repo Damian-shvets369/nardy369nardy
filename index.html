@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мухоморные нарды</title>
+  <meta name="description" content="Короткие нарды с мухоморными шапками: красные против пантерных. Двое за одним экраном, против ИИ или по сети." />
+  <meta name="theme-color" content="#0c130d" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23121b13'/%3E%3Cpath d='M5 21c0-8 6.7-13 15-13s15 5 15 13c0 2.4-1.3 3.7-3.4 3.3-1.7-.3-2.8 1.4-4.8 1-2-.4-2.8.9-4.9.5-2-.4-2.9.9-4.9.5-2-.4-3 1.3-4.7.9C7.2 24.7 5 23.4 5 21Z' fill='%23d33a2c'/%3E%3Ccircle cx='14' cy='15' r='3' fill='%23fbf0da'/%3E%3Ccircle cx='24' cy='13' r='2.2' fill='%23fbf0da'/%3E%3Ccircle cx='20' cy='21' r='1.8' fill='%23fbf0da'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <svg class="mush-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+<defs>
+  <filter id="mush-capGrain" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="3" seed="8" result="coarse"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" seed="17" result="fine"/>
+    <feBlend in="coarse" in2="fine" mode="overlay" result="mixed"/>
+    <feColorMatrix in="mixed" type="saturate" values="0" result="mono"/>
+    <feComponentTransfer in="mono" result="grain">
+      <feFuncR type="linear" slope="0.3" intercept="0.73"/>
+      <feFuncG type="linear" slope="0.3" intercept="0.73"/>
+      <feFuncB type="linear" slope="0.3" intercept="0.73"/>
+    </feComponentTransfer>
+    <feBlend in="SourceGraphic" in2="grain" mode="multiply" result="blended"/>
+    <feComposite in="blended" in2="SourceAlpha" operator="in"/>
+  </filter>
+
+    <filter id="mush-capEdge" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <radialGradient id="mush-capW" cx="35%" cy="23%" r="76%">
+    <stop offset="0%" stop-color="#ff8a5b"/>
+    <stop offset="14%" stop-color="#f45a36"/>
+    <stop offset="36%" stop-color="#e0371f"/>
+    <stop offset="62%" stop-color="#bd1e0f"/>
+    <stop offset="85%" stop-color="#911006"/>
+    <stop offset="100%" stop-color="#680803"/>
+  </radialGradient>
+  <radialGradient id="mush-vignetteW" cx="44%" cy="32%" r="66%">
+    <stop offset="0%" stop-color="rgba(80,3,0,0)"/>
+    <stop offset="54%" stop-color="rgba(80,3,0,0)"/>
+    <stop offset="79%" stop-color="rgba(84,4,0,.13)"/>
+    <stop offset="92%" stop-color="rgba(66,2,0,.32)"/>
+    <stop offset="100%" stop-color="rgba(44,1,0,.52)"/>
+  </radialGradient>
+  <radialGradient id="mush-wartW" cx="38%" cy="32%" r="80%">
+    <stop offset="0%" stop-color="#f6ecd6"/>
+    <stop offset="58%" stop-color="#eeddc0"/>
+    <stop offset="88%" stop-color="#e3d0ac"/>
+    <stop offset="100%" stop-color="#d8c198"/>
+  </radialGradient>
+  <radialGradient id="mush-wartW2" cx="40%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#f2e6ca"/>
+    <stop offset="58%" stop-color="#e8d5b2"/>
+    <stop offset="88%" stop-color="#dcc7a1"/>
+    <stop offset="100%" stop-color="#cfb88e"/>
+  </radialGradient>
+
+  <radialGradient id="mush-capB" cx="35%" cy="23%" r="78%">
+    <stop offset="0%" stop-color="#a48968"/>
+    <stop offset="16%" stop-color="#84694b"/>
+    <stop offset="40%" stop-color="#665035"/>
+    <stop offset="64%" stop-color="#4d3823"/>
+    <stop offset="86%" stop-color="#362515"/>
+    <stop offset="100%" stop-color="#27190b"/>
+  </radialGradient>
+  <radialGradient id="mush-vignetteB" cx="44%" cy="32%" r="66%">
+    <stop offset="0%" stop-color="rgba(30,18,8,0)"/>
+    <stop offset="54%" stop-color="rgba(30,18,8,0)"/>
+    <stop offset="79%" stop-color="rgba(30,18,8,.15)"/>
+    <stop offset="92%" stop-color="rgba(26,14,6,.34)"/>
+    <stop offset="100%" stop-color="rgba(16,9,4,.56)"/>
+  </radialGradient>
+  <radialGradient id="mush-wartB" cx="38%" cy="32%" r="80%">
+    <stop offset="0%" stop-color="#f2ecdf"/>
+    <stop offset="58%" stop-color="#e8dec9"/>
+    <stop offset="88%" stop-color="#dccdb0"/>
+    <stop offset="100%" stop-color="#cdbb9c"/>
+  </radialGradient>
+  <radialGradient id="mush-wartB2" cx="40%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#ece4d3"/>
+    <stop offset="58%" stop-color="#e0d4bc"/>
+    <stop offset="88%" stop-color="#d1c1a3"/>
+    <stop offset="100%" stop-color="#c2ae8d"/>
+  </radialGradient>
+
+  <linearGradient id="mush-stemW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bda27a"/><stop offset="28%" stop-color="#f4e8d0"/><stop offset="68%" stop-color="#e8d7ba"/><stop offset="100%" stop-color="#ab8d64"/></linearGradient><linearGradient id="mush-stemB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b4a78d"/><stop offset="28%" stop-color="#f2ead8"/><stop offset="68%" stop-color="#e6dcc6"/><stop offset="100%" stop-color="#a2937a"/></linearGradient><radialGradient id="mush-shadowG" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgba(0,0,0,.46)"/>
+    <stop offset="55%" stop-color="rgba(0,0,0,.27)"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+  </radialGradient>
+  <radialGradient id="mush-sheen" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgba(255,255,255,.08)"/>
+    <stop offset="55%" stop-color="rgba(255,255,255,.025)"/>
+    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+  </radialGradient>
+
+  <path id="mush-capShape" d="M49 5C64 4.5 79.5 10.5 86.5 20 93 29 95 42 91.5 53 90 58 87.5 62 84 65 82.5 66.3 81 65.5 79.8 67 77.5 70 74 71 71 73 64.5 75.3 57 77 49 76 41.5 75 35 75.6 28 72.6 19 68.8 11.5 60 9.2 49.5 7 39 10.5 27.5 17.5 19.5 25 11 36 5.5 49 5Z"/>
+  <clipPath id="mush-capClip"><use href="#mush-capShape"/></clipPath>
+
+  <g id="mush-wartW1">
+    <path d="M-4.3 -1.4C-4.4 -2.9 -3.2 -4.3 -1.6 -4.4 -0.9 -4.5 -0.2 -4.7 0.4 -4.2 1.4 -3.9 2.4 -3.6 2.9 -2.7 3.6 -1.8 4.2 -0.9 3.9 0.2 3.7 1.4 2.8 1.9 2.2 2.8 1.4 3.4 0.4 3.6 -0.5 3.4 -1.4 3.3 -2.1 3.6 -2.8 2.9 -3.7 2.3 -3.8 1.2 -4.1 0.3 -4.5 -0.2 -4.3 -0.8 -4.3 -1.4Z" fill="url(#mush-wartW)" stroke="rgba(116,90,58,.32)" stroke-width=".16"/>
+  </g>
+  <g id="mush-wartW2s">
+    <path d="M-5.4 -1.2C-5.3 -2.5 -4.2 -3.6 -2.9 -3.7 -2.1 -3.8 -1.4 -3.4 -0.6 -3.6 0.5 -3.9 1.4 -3.2 2.3 -2.9 3.6 -2.4 4.8 -1.8 5 -0.6 5.2 0.6 4.3 1.3 3.6 2 2.8 2.8 1.7 3.1 0.6 3 -0.4 2.9 -1.2 3.2 -2.1 2.7 -3.2 2.3 -4.4 1.9 -4.8 0.9 -5.2 0.2 -5.5 -0.4 -5.4 -1.2Z" fill="url(#mush-wartW2)" stroke="rgba(116,90,58,.3)" stroke-width=".15"/>
+  </g>
+  <g id="mush-wartW3">
+    <path d="M-2.8 -0.9C-2.9 -2.1 -2 -3 -0.8 -3.1 -0.2 -3.2 0.3 -3 0.8 -2.8 1.7 -2.5 2.4 -1.8 2.5 -0.9 2.6 -0.1 2 0.5 1.6 1.1 1 1.9 0.2 2.2 -0.6 2 -1.5 1.8 -2.1 2 -2.6 1.3 -3 0.7 -2.7 0.1 -2.8 -0.9Z" fill="url(#mush-wartW)" stroke="rgba(116,90,58,.28)" stroke-width=".13"/>
+  </g>
+  <g id="mush-wartW4">
+    <path d="M-6 -0.8C-6.1 -2 -5.2 -3 -4 -3.1 -3.4 -3.2 -2.8 -2.8 -2.3 -3 -1.7 -3.3 -1.3 -3.1 -0.9 -2.7 -0.4 -3.2 0.2 -3.3 0.8 -3 1.4 -2.7 1.6 -3 2.2 -2.9 3.4 -2.7 4.5 -2.4 5.2 -1.6 6 -0.7 6 0.4 5.2 1.2 4.6 1.9 3.5 2.1 2.7 1.9 2 1.7 1.4 2.2 0.7 2 0 1.8 -0.5 2.2 -1.2 2.1 -2 1.9 -2.4 2.3 -3.1 2 -4.2 1.6 -5.1 1.3 -5.6 0.5 -5.9 0 -6 -0.4 -6 -0.8Z" fill="url(#mush-wartW)" stroke="rgba(116,90,58,.3)" stroke-width=".15"/>
+  </g>
+  <g id="mush-wartB1">
+    <path d="M-4.1 -1.3C-4.2 -2.8 -3.1 -4.1 -1.5 -4.2 -0.8 -4.3 -0.2 -4.5 0.4 -4 1.4 -3.7 2.3 -3.4 2.8 -2.6 3.5 -1.7 4 -0.8 3.8 0.2 3.6 1.3 2.7 1.8 2.1 2.7 1.3 3.3 0.4 3.5 -0.5 3.3 -1.4 3.2 -2 3.5 -2.7 2.8 -3.6 2.2 -3.7 1.1 -4 0.3 -4.3 -0.2 -4.1 -0.8 -4.1 -1.3Z" fill="url(#mush-wartB)" stroke="rgba(106,92,64,.36)" stroke-width=".15"/>
+  </g>
+  <g id="mush-wartB2s">
+    <path d="M-3.5 -1.1C-3.6 -2.4 -2.6 -3.4 -1.3 -3.5 -0.6 -3.6 -0.1 -3.3 0.5 -3.4 1.3 -3.6 2.1 -3 2.7 -2.4 3.4 -1.6 4 -0.8 3.9 0.2 3.8 1.1 3 1.5 2.5 2.2 1.8 3 1 3.3 0.2 3.1 -0.6 3 -1.2 3.3 -1.8 2.7 -2.6 2.2 -3.6 1.8 -3.8 0.9 -3.9 0.3 -3.6 -0.1 -3.5 -1.1Z" fill="url(#mush-wartB2)" stroke="rgba(106,92,64,.34)" stroke-width=".14"/>
+  </g>
+</defs>
+<symbol id="mush-w" viewBox="0 0 100 100">
+  <ellipse cx="53" cy="82" rx="36" ry="8.5" fill="url(#mush-shadowG)"/>
+  <ellipse cx="50" cy="86.5" rx="9" ry="2.4" fill="#2e1a0a" opacity=".35"/><path d="M44.8 66C43.2 72 43 78 44.2 84 45.2 89.2 55.8 89.3 56.6 84.2 57.4 79 56.8 72.5 55.2 66Z" fill="url(#mush-stemW)" stroke="#a1845a" stroke-width=".35"/><path d="M47 70C46.6 75 46.8 81 47.6 86" stroke="#c3a478" stroke-width=".65" fill="none" opacity=".5"/><path d="M53.2 71C53.6 76 53.4 81 52.6 86" stroke="#b09366" stroke-width=".55" fill="none" opacity=".45"/><ellipse cx="50" cy="76.5" rx="13" ry="3.2" fill="#3a1a08" opacity=".4"/><path d="M45.8 80.5C48.4 81.9 51.6 81.9 54.2 80.5" stroke="#b99a6d" stroke-width=".7" opacity=".35" fill="none"/><g filter="url(#mush-capEdge)"><use href="#mush-capShape" fill="url(#mush-capW)" filter="url(#mush-capGrain)" stroke="#4a0300" stroke-width=".35"/>
+  <g clip-path="url(#mush-capClip)">
+    <rect x="0" y="0" width="100" height="100" fill="url(#mush-vignetteW)"/>
+    <ellipse cx="61" cy="56" rx="30" ry="17" fill="#6e0d05" opacity=".12" transform="rotate(9 61 56)"/>
+    <ellipse cx="34" cy="21" rx="17" ry="9" fill="#ffb08a" opacity=".08" transform="rotate(-18 34 21)"/>
+    <ellipse cx="24" cy="61" rx="14" ry="8" fill="#5e0803" opacity=".09" transform="rotate(-8 24 61)"/>
+    <g stroke="#5f0602" stroke-width=".4" fill="none" opacity=".11">
+      <path d="M84.0 40.0L98.0 40.0"/><path d="M83.5 45.0L97.3 47.0"/><path d="M81.9 49.8L95.1 53.8"/><path d="M79.4 54.3L91.6 60.2"/><path d="M76.0 58.4L86.8 65.9"/><path d="M71.9 61.9L80.9 70.9"/><path d="M67.0 64.7L74.0 74.9"/><path d="M61.6 66.8L66.4 77.9"/><path d="M55.9 68.1L58.3 79.7"/><path d="M50.0 68.6L50.0 80.3"/><path d="M44.1 68.1L41.7 79.7"/><path d="M38.4 66.8L33.6 77.9"/><path d="M33.0 64.7L26.0 74.9"/><path d="M28.1 61.9L19.1 70.9"/><path d="M24.0 58.4L13.2 65.9"/><path d="M20.6 54.3L8.4 60.2"/><path d="M18.1 49.8L4.9 53.8"/><path d="M16.5 45.0L2.7 47.0"/><path d="M16.0 40.0L2.0 40.0"/><path d="M16.5 35.0L2.7 33.0"/><path d="M18.1 30.2L4.9 26.2"/><path d="M20.6 25.7L8.4 19.8"/><path d="M24.0 21.6L13.2 14.1"/><path d="M28.1 18.1L19.1 9.1"/><path d="M33.0 15.3L26.0 5.1"/><path d="M38.4 13.2L33.6 2.1"/><path d="M44.1 11.9L41.7 0.3"/><path d="M50.0 11.4L50.0 -0.3"/><path d="M55.9 11.9L58.3 0.3"/><path d="M61.6 13.2L66.4 2.1"/><path d="M67.0 15.3L74.0 5.1"/><path d="M71.9 18.1L80.9 9.1"/><path d="M76.0 21.6L86.8 14.1"/><path d="M79.4 25.7L91.6 19.8"/><path d="M81.9 30.2L95.1 26.2"/><path d="M83.5 35.0L97.3 33.0"/>
+    </g>
+    <g stroke="#ffb592" stroke-width=".42" fill="none" opacity=".06">
+      <path d="M83.9 42.5L97.8 43.5"/><path d="M82.8 47.4L96.4 50.4"/><path d="M80.8 52.1L93.5 57.0"/><path d="M77.9 56.4L89.3 63.1"/><path d="M74.0 60.2L83.9 68.5"/><path d="M69.5 63.4L77.5 73.0"/><path d="M64.4 65.9L70.3 76.5"/><path d="M58.8 67.6L62.4 78.9"/><path d="M53.0 68.5L54.2 80.2"/><path d="M47.0 68.5L45.8 80.2"/><path d="M41.2 67.6L37.6 78.9"/><path d="M35.6 65.9L29.7 76.5"/><path d="M30.5 63.4L22.5 73.0"/><path d="M26.0 60.2L16.1 68.5"/><path d="M22.1 56.4L10.7 63.1"/><path d="M19.2 52.1L6.5 57.0"/><path d="M17.2 47.4L3.6 50.4"/><path d="M16.1 42.5L2.2 43.5"/><path d="M16.1 37.5L2.2 36.5"/><path d="M17.2 32.6L3.6 29.6"/><path d="M19.2 27.9L6.5 23.0"/><path d="M22.1 23.6L10.7 16.9"/><path d="M26.0 19.8L16.1 11.5"/><path d="M30.5 16.6L22.5 7.0"/><path d="M35.6 14.1L29.7 3.5"/><path d="M41.2 12.4L37.6 1.1"/><path d="M47.0 11.5L45.8 -0.2"/><path d="M53.0 11.5L54.2 -0.2"/><path d="M58.8 12.4L62.4 1.1"/><path d="M64.4 14.1L70.3 3.5"/><path d="M69.5 16.6L77.5 7.0"/><path d="M74.0 19.8L83.9 11.5"/><path d="M77.9 23.6L89.3 16.9"/><path d="M80.8 27.9L93.5 23.0"/><path d="M82.8 32.6L96.4 29.6"/><path d="M83.9 37.5L97.8 36.5"/>
+    </g>
+    <g style="filter: drop-shadow(0 1px .7px rgba(45,22,6,.35))">
+      <use href="#mush-wartW1" transform="translate(42 30) scale(1.3) rotate(-14)"/>
+      <use href="#mush-wartW2s" transform="translate(58 27) scale(.88) rotate(16)"/>
+      <use href="#mush-wartW1" transform="translate(51 43) scale(1.0) rotate(8)"/>
+      <use href="#mush-wartW2s" transform="translate(34 42) scale(.76) rotate(-22)"/>
+      <use href="#mush-wartW3" transform="translate(64 45) scale(.82) rotate(12)"/>
+      <use href="#mush-wartW1" transform="translate(28 33) scale(.94) rotate(20)"/>
+      <use href="#mush-wartW2s" transform="translate(74 37) scale(.92) rotate(-16)"/>
+      <use href="#mush-wartW3" transform="translate(40 19) scale(.85) rotate(-6)"/>
+      <use href="#mush-wartW3" transform="translate(61 17.5) scale(.7) rotate(24)"/>
+      <use href="#mush-wartW2s" transform="translate(23 48) scale(.74) rotate(10)"/>
+      <use href="#mush-wartW3" transform="translate(78 50) scale(.68) rotate(-8)"/>
+      <use href="#mush-wartW2s" transform="translate(35 54) scale(.78) rotate(-16)"/>
+      <use href="#mush-wartW3" transform="translate(58 55) scale(.64) rotate(18)"/>
+      <use href="#mush-wartW4" transform="translate(48 58) scale(.72) rotate(-4)"/>
+      <use href="#mush-wartW2s" transform="translate(18 54) scale(.54) rotate(8)"/>
+      <use href="#mush-wartW2s" transform="translate(84 53) scale(.48) rotate(-14)"/>
+      <use href="#mush-wartW3" transform="translate(28 63) scale(.52) rotate(16)"/>
+      <use href="#mush-wartW2s" transform="translate(69 63) scale(.45) rotate(-6)"/>
+      <use href="#mush-wartW3" transform="translate(45 66) scale(.44) rotate(4)"/>
+      <use href="#mush-wartW3" transform="translate(57 67) scale(.4) rotate(-10)"/>
+      <use href="#mush-wartW3" transform="translate(66 22) scale(.48) rotate(22)"/>
+      <use href="#mush-wartW3" transform="translate(21 25) scale(.48) rotate(-20)"/>
+      <use href="#mush-wartW2s" transform="translate(87 44) scale(.42) rotate(6)"/>
+      <use href="#mush-wartW3" transform="translate(11 48) scale(.38) rotate(-12)"/>
+      <use href="#mush-wartW3" transform="translate(47 11.5) scale(.38) rotate(10)"/>
+      <use href="#mush-wartW3" transform="translate(54 34) scale(.36) rotate(-18)"/>
+      <use href="#mush-wartW3" transform="translate(67 31) scale(.36) rotate(14)"/>
+      <use href="#mush-wartW4" transform="translate(39 36) scale(.48) rotate(6)"/>
+      <use href="#mush-wartW3" transform="translate(30 57) scale(.34) rotate(-8)"/>
+      <use href="#mush-wartW3" transform="translate(76 58) scale(.32) rotate(16)"/>
+      <use href="#mush-wartW2s" transform="translate(63 52) scale(.35) rotate(-24)"/>
+      <use href="#mush-wartW3" transform="translate(33 24) scale(.34) rotate(22)"/>
+      <use href="#mush-wartW3" transform="translate(50 21) scale(.3) rotate(-6)"/>
+      <use href="#mush-wartW3" transform="translate(24 59) scale(.2) rotate(12)"/>
+      <use href="#mush-wartW3" transform="translate(73 55) scale(.18) rotate(-8)"/>
+      <use href="#mush-wartW3" transform="translate(44 63) scale(.16) rotate(4)"/>
+      <use href="#mush-wartW2s" transform="translate(52 63.5) scale(.15) rotate(-12)"/>
+      <use href="#mush-wartW2s" transform="translate(8 60) scale(1.0) rotate(-18)"/>
+      <use href="#mush-wartW3" transform="translate(91 62) scale(.8) rotate(14)"/>
+    </g>
+    <path d="M15 58C18 66 25 70.5 34 73 42 75.2 50 75.8 58 75 67 74 75 70.8 81 65.5" fill="none" stroke="#5c0502" stroke-width="4" opacity=".22"/>
+    <path d="M20 65.5C29 70.5 39 73 49 73.2 59 73.4 68 71.2 75 67.5" fill="none" stroke="#ff9c74" stroke-width=".5" opacity=".24"/>
+    <ellipse cx="38" cy="27" rx="20" ry="11" fill="url(#mush-sheen)" transform="rotate(-24 38 27)"/>
+    <ellipse cx="36" cy="24" rx="5" ry="2.2" fill="#fff" opacity=".055" transform="rotate(-26 36 24)"/>
+    <path d="M12 42C15 28 25 15.5 42 11" stroke="#ffc0a0" stroke-width="1" fill="none" opacity=".16" stroke-linecap="round"/><path d="M15 53C19 63 27 69.5 37 72.5" stroke="#ff9d78" stroke-width="1.2" fill="none" opacity=".08" stroke-linecap="round"/>
+    <path d="M89 43C88 52 84 58 78 63" stroke="#ffb28c" stroke-width=".7" fill="none" opacity=".13" stroke-linecap="round"/>
+  </g></g>
+</symbol>
+<symbol id="mush-b" viewBox="0 0 100 100">
+  <ellipse cx="53" cy="82" rx="36" ry="8.5" fill="url(#mush-shadowG)"/>
+  <ellipse cx="50" cy="86.5" rx="9" ry="2.4" fill="#241708" opacity=".38"/><path d="M44.8 66C43.2 72 43 78 44.2 84 45.2 89.2 55.8 89.3 56.6 84.2 57.4 79 56.8 72.5 55.2 66Z" fill="url(#mush-stemB)" stroke="#8e8068" stroke-width=".35"/><path d="M47 71C46.6 75 46.8 80 47.4 84" stroke="#a99374" stroke-width=".9" fill="none" opacity=".4"/><path d="M53 73C53.3 76 53.2 80 52.7 83" stroke="#9c8768" stroke-width=".7" fill="none" opacity=".38"/><ellipse cx="50" cy="76.5" rx="13" ry="3.2" fill="#241708" opacity=".42"/><path d="M45.8 80.5C48.4 81.9 51.6 81.9 54.2 80.5" stroke="#9a8768" stroke-width=".7" opacity=".35" fill="none"/><use href="#mush-capShape" fill="url(#mush-capB)" filter="url(#mush-capGrain)" stroke="#1c1106" stroke-width=".35"/>
+  <g clip-path="url(#mush-capClip)">
+    <rect x="0" y="0" width="100" height="100" fill="url(#mush-vignetteB)"/>
+    <ellipse cx="61" cy="56" rx="30" ry="17" fill="#1e1308" opacity=".13" transform="rotate(9 61 56)"/>
+    <ellipse cx="34" cy="21" rx="17" ry="9" fill="#d8c09c" opacity=".07" transform="rotate(-18 34 21)"/>
+    <g stroke="#241407" stroke-width=".4" fill="none" opacity=".13">
+      <path d="M84.0 40.0L98.0 40.0"/><path d="M83.5 45.0L97.3 47.0"/><path d="M81.9 49.8L95.1 53.8"/><path d="M79.4 54.3L91.6 60.2"/><path d="M76.0 58.4L86.8 65.9"/><path d="M71.9 61.9L80.9 70.9"/><path d="M67.0 64.7L74.0 74.9"/><path d="M61.6 66.8L66.4 77.9"/><path d="M55.9 68.1L58.3 79.7"/><path d="M50.0 68.6L50.0 80.3"/><path d="M44.1 68.1L41.7 79.7"/><path d="M38.4 66.8L33.6 77.9"/><path d="M33.0 64.7L26.0 74.9"/><path d="M28.1 61.9L19.1 70.9"/><path d="M24.0 58.4L13.2 65.9"/><path d="M20.6 54.3L8.4 60.2"/><path d="M18.1 49.8L4.9 53.8"/><path d="M16.5 45.0L2.7 47.0"/><path d="M16.0 40.0L2.0 40.0"/><path d="M16.5 35.0L2.7 33.0"/><path d="M18.1 30.2L4.9 26.2"/><path d="M20.6 25.7L8.4 19.8"/><path d="M24.0 21.6L13.2 14.1"/><path d="M28.1 18.1L19.1 9.1"/><path d="M33.0 15.3L26.0 5.1"/><path d="M38.4 13.2L33.6 2.1"/><path d="M44.1 11.9L41.7 0.3"/><path d="M50.0 11.4L50.0 -0.3"/><path d="M55.9 11.9L58.3 0.3"/><path d="M61.6 13.2L66.4 2.1"/><path d="M67.0 15.3L74.0 5.1"/><path d="M71.9 18.1L80.9 9.1"/><path d="M76.0 21.6L86.8 14.1"/><path d="M79.4 25.7L91.6 19.8"/><path d="M81.9 30.2L95.1 26.2"/><path d="M83.5 35.0L97.3 33.0"/>
+    </g>
+    <g stroke="#cbb591" stroke-width=".42" fill="none" opacity=".05">
+      <path d="M83.9 42.5L97.8 43.5"/><path d="M82.8 47.4L96.4 50.4"/><path d="M80.8 52.1L93.5 57.0"/><path d="M77.9 56.4L89.3 63.1"/><path d="M74.0 60.2L83.9 68.5"/><path d="M69.5 63.4L77.5 73.0"/><path d="M64.4 65.9L70.3 76.5"/><path d="M58.8 67.6L62.4 78.9"/><path d="M53.0 68.5L54.2 80.2"/><path d="M47.0 68.5L45.8 80.2"/><path d="M41.2 67.6L37.6 78.9"/><path d="M35.6 65.9L29.7 76.5"/><path d="M30.5 63.4L22.5 73.0"/><path d="M26.0 60.2L16.1 68.5"/><path d="M22.1 56.4L10.7 63.1"/><path d="M19.2 52.1L6.5 57.0"/><path d="M17.2 47.4L3.6 50.4"/><path d="M16.1 42.5L2.2 43.5"/><path d="M16.1 37.5L2.2 36.5"/><path d="M17.2 32.6L3.6 29.6"/><path d="M19.2 27.9L6.5 23.0"/><path d="M22.1 23.6L10.7 16.9"/><path d="M26.0 19.8L16.1 11.5"/><path d="M30.5 16.6L22.5 7.0"/><path d="M35.6 14.1L29.7 3.5"/><path d="M41.2 12.4L37.6 1.1"/><path d="M47.0 11.5L45.8 -0.2"/><path d="M53.0 11.5L54.2 -0.2"/><path d="M58.8 12.4L62.4 1.1"/><path d="M64.4 14.1L70.3 3.5"/><path d="M69.5 16.6L77.5 7.0"/><path d="M74.0 19.8L83.9 11.5"/><path d="M77.9 23.6L89.3 16.9"/><path d="M80.8 27.9L93.5 23.0"/><path d="M82.8 32.6L96.4 29.6"/><path d="M83.9 37.5L97.8 36.5"/>
+    </g>
+    <g style="filter: drop-shadow(0 1px .7px rgba(20,12,5,.4))">
+      <use href="#mush-wartB1" transform="translate(41 30) scale(.95) rotate(-12)"/>
+      <use href="#mush-wartB2s" transform="translate(57 26) scale(.7) rotate(16)"/>
+      <use href="#mush-wartB1" transform="translate(50 42) scale(.8) rotate(8)"/>
+      <use href="#mush-wartB2s" transform="translate(34 41) scale(.6) rotate(-20)"/>
+      <use href="#mush-wartB1" transform="translate(63 44) scale(.64) rotate(12)"/>
+      <use href="#mush-wartB2s" transform="translate(29 33) scale(.68) rotate(20)"/>
+      <use href="#mush-wartB1" transform="translate(73 37) scale(.72) rotate(-16)"/>
+      <use href="#mush-wartB2s" transform="translate(40 20) scale(.64) rotate(-6)"/>
+      <use href="#mush-wartB1" transform="translate(60 18) scale(.56) rotate(24)"/>
+      <use href="#mush-wartB2s" transform="translate(23 47) scale(.54) rotate(10)"/>
+      <use href="#mush-wartB1" transform="translate(78 49) scale(.54) rotate(-8)"/>
+      <use href="#mush-wartB2s" transform="translate(35 53) scale(.58) rotate(-16)"/>
+      <use href="#mush-wartB1" transform="translate(57 54) scale(.48) rotate(18)"/>
+      <use href="#mush-wartB2s" transform="translate(47 57) scale(.52) rotate(-4)"/>
+      <use href="#mush-wartB1" transform="translate(18 53) scale(.4) rotate(8)"/>
+      <use href="#mush-wartB2s" transform="translate(84 52) scale(.38) rotate(-14)"/>
+      <use href="#mush-wartB1" transform="translate(28 63) scale(.38) rotate(16)"/>
+      <use href="#mush-wartB2s" transform="translate(69 63) scale(.36) rotate(-6)"/>
+      <use href="#mush-wartB1" transform="translate(44 66) scale(.34) rotate(4)"/>
+      <use href="#mush-wartB2s" transform="translate(56 67) scale(.31) rotate(-10)"/>
+      <use href="#mush-wartB1" transform="translate(66 21) scale(.4) rotate(22)"/>
+      <use href="#mush-wartB2s" transform="translate(21 24) scale(.4) rotate(-20)"/>
+      <use href="#mush-wartB1" transform="translate(86 43) scale(.36) rotate(6)"/>
+      <use href="#mush-wartB2s" transform="translate(11 47) scale(.31) rotate(-12)"/>
+      <use href="#mush-wartB1" transform="translate(46 11) scale(.28) rotate(10)"/>
+      <use href="#mush-wartB2s" transform="translate(54 33) scale(.31) rotate(-18)"/>
+      <use href="#mush-wartB1" transform="translate(67 30) scale(.28) rotate(14)"/>
+      <use href="#mush-wartB2s" transform="translate(38 35) scale(.36) rotate(6)"/>
+      <use href="#mush-wartB1" transform="translate(30 56) scale(.28) rotate(-8)"/>
+      <use href="#mush-wartB2s" transform="translate(76 57) scale(.26) rotate(16)"/>
+      <use href="#mush-wartB1" transform="translate(25 37) scale(.26) rotate(4)"/>
+      <use href="#mush-wartB2s" transform="translate(74 25) scale(.31) rotate(-22)"/>
+      <use href="#mush-wartB1" transform="translate(33 23) scale(.28) rotate(12)"/>
+      <use href="#mush-wartB2s" transform="translate(45 61.5) scale(.22) rotate(-8)"/>
+      <use href="#mush-wartB1" transform="translate(59 61) scale(.2) rotate(14)"/>
+      <use href="#mush-wartB2s" transform="translate(8 60) scale(.8) rotate(-18)"/>
+      <use href="#mush-wartB1" transform="translate(90 62) scale(.65) rotate(14)"/>
+    </g>
+    <path d="M15 58C18 66 25 70.5 34 73 42 75.2 50 75.8 58 75 67 74 75 70.8 81 65.5" fill="none" stroke="#150c04" stroke-width="4" opacity=".25"/>
+    <path d="M20 65.5C29 70.5 39 73 49 73.2 59 73.4 68 71.2 75 67.5" fill="none" stroke="#e5ccab" stroke-width=".5" opacity=".16"/>
+    <ellipse cx="38" cy="27" rx="19" ry="10" fill="url(#mush-sheen)" transform="rotate(-22 38 27)" opacity=".6"/>
+    <ellipse cx="36" cy="24" rx="4.5" ry="2" fill="#fff" opacity=".045" transform="rotate(-24 36 24)"/>
+    <path d="M12 42C15 28 25 15.5 42 11" stroke="#e8cba6" stroke-width=".9" fill="none" opacity=".13" stroke-linecap="round"/>
+  </g>
+</symbol>
+  </svg>
+  <div class="spores" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <use href="#mush-b" transform="translate(-8 12) scale(.62)" />
+          <use href="#mush-w" transform="translate(20 0) scale(.8)" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Мухоморные нарды</h1>
+        <p class="tagline">короткие нарды · красные против пантерных</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost" id="modeBtn" type="button">Режим</button>
+      <button class="btn ghost" id="rulesBtn" type="button">Правила</button>
+      <button class="btn ghost" id="newGameBtn" type="button">Новая игра</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="board-area" aria-label="Игровая доска">
+      <div class="board-frame" id="boardFrame">
+        <div class="board-grid" id="boardGrid"></div>
+        <div class="tray-strip">
+          <div class="tray" data-tray="b" aria-label="Снятые шапки пантерных мухоморов">
+            <div class="tray-pieces"></div>
+            <span class="tray-count">0</span>
+          </div>
+          <div class="tray" data-tray="w" aria-label="Снятые шапки красных мухоморов">
+            <div class="tray-pieces"></div>
+            <span class="tray-count">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="board-caption">
+        <span><i class="key-dot red"></i>дом красных — нижний правый</span>
+        <span><i class="key-dot brown"></i>дом пантерных — верхний правый</span>
+      </div>
+    </section>
+
+    <aside class="side">
+      <button class="mode-badge" id="modeBadge" type="button" aria-label="Сменить режим игры">
+        <span class="mode-badge-dot" aria-hidden="true"></span>
+        <span class="mode-badge-text" id="modeBadgeText">Двое за одним экраном</span>
+        <span class="mode-badge-edit">сменить</span>
+      </button>
+
+      <div class="turn-card" id="turnCard" data-player="w">
+        <div class="turn-avatar" id="turnAvatar"></div>
+        <div class="turn-text">
+          <p class="eyebrow">сейчас ходят</p>
+          <h2 id="turnName">Красные мухоморы</h2>
+        </div>
+        <span class="turn-dot" aria-hidden="true"></span>
+      </div>
+
+      <div class="panel">
+        <div class="dice-row" id="diceRow"></div>
+        <div class="actions">
+          <button class="btn primary" id="rollBtn" type="button">Бросить кости</button>
+          <button class="btn ghost" id="undoBtn" type="button" disabled>Отменить</button>
+        </div>
+        <p class="status" id="status" role="status">Бросайте кости — и вперёд по мху.</p>
+      </div>
+
+      <div class="player-list">
+        <article class="player-card" id="card-w" data-player="w">
+          <div class="avatar" id="avatar-w"></div>
+          <div class="player-info">
+            <h3>Красные мухоморы</h3>
+            <div class="stats">
+              <span><b data-off>0</b><small>снято</small></span>
+              <span><b data-bar>0</b><small>на баре</small></span>
+              <span><b data-pips>167</b><small>пипсы</small></span>
+            </div>
+          </div>
+        </article>
+        <article class="player-card" id="card-b" data-player="b">
+          <div class="avatar" id="avatar-b"></div>
+          <div class="player-info">
+            <h3>Пантерные мухоморы</h3>
+            <div class="stats">
+              <span><b data-off>0</b><small>снято</small></span>
+              <span><b data-bar>0</b><small>на баре</small></span>
+              <span><b data-pips>167</b><small>пипсы</small></span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="footnote">Короткие нарды с боем: шапка соперника, оставшаяся одна, уходит на бар. Побеждает тот, кто первым снимет все 15.</p>
+    </aside>
+  </main>
+
+  <div class="modal" id="rulesModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <h2 id="rulesTitle">Как играть</h2>
+      <p>Короткие нарды для двоих за одним экраном. Красные шапки идут от 24-й точки к 1-й, пантерные — навстречу, от 1-й к 24-й.</p>
+      <h3>Ход</h3>
+      <p>Бросайте две кости и передвигайте шапки на выпавшие числа. Дубль даёт четыре хода. Нужно использовать максимум выпавших чисел; если играется только одно — играйте большее.</p>
+      <h3>Бой и бар</h3>
+      <p>Если на точке осталась одна шапка соперника, она бьётся и уходит на бар. Пока на баре есть ваши шапки, ходить можно только ими — вводите их в дом соперника.</p>
+      <h3>Дом и вывод</h3>
+      <p>Когда все 15 шапок собраны в своём доме, их можно снимать с доски. Нужен точный бросок; большее число снимает шапку с самой дальней точки.</p>
+      <h3>Режимы</h3>
+      <p>Кнопка «Режим» в шапке переключает игру: двое за одним экраном, партия против ИИ (три уровня) или по сети. Для игры по сети запустите server.py, создайте комнату и отправьте другу код или ссылку — он войдёт вторым.</p>
+      <h3>Победа</h3>
+      <p>Побеждает тот, кто первым снимет все свои шапки. Если у соперника не снято ни одной — это сухая победа.</p>
+      <button class="btn primary wide" type="button" data-close>Понятно</button>
+    </div>
+  </div>
+
+  <div class="modal" id="winModal" hidden>
+    <div class="modal-card win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <div class="win-avatar" id="winAvatar"></div>
+      <p class="eyebrow">партия окончена</p>
+      <h2 id="winTitle">Победа</h2>
+      <p id="winText"></p>
+      <button class="btn primary" id="winNewGame" type="button">Ещё партия</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modeModal" hidden>
+    <div class="modal-card mode-card" role="dialog" aria-modal="true" aria-labelledby="modeTitle">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <p class="eyebrow">как играем</p>
+      <h2 id="modeTitle">Режим игры</h2>
+
+      <div class="mode-list" role="radiogroup" aria-label="Режим">
+        <button class="mode-option" type="button" data-mode="hotseat" role="radio" aria-checked="true">
+          <span class="mode-option-title">Двое за экраном</span>
+          <span class="mode-option-note">по очереди на этом устройстве</span>
+        </button>
+        <button class="mode-option" type="button" data-mode="ai" role="radio" aria-checked="false">
+          <span class="mode-option-title">Против ИИ</span>
+          <span class="mode-option-note">лесной соперник трёх уровней</span>
+        </button>
+        <button class="mode-option" type="button" data-mode="online" role="radio" aria-checked="false">
+          <span class="mode-option-title">По сети</span>
+          <span class="mode-option-note">партия с другом на другом устройстве</span>
+        </button>
+      </div>
+
+      <div class="mode-extra" id="aiOptions" hidden>
+        <div class="field-row">
+          <span class="field-label">Ваши шапки</span>
+          <div class="seg" id="aiColorSeg">
+            <button type="button" data-color="w" class="seg-btn"><span class="seg-mush" data-mush="w"></span>красные</button>
+            <button type="button" data-color="b" class="seg-btn"><span class="seg-mush" data-mush="b"></span>пантерные</button>
+          </div>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Уровень</span>
+          <div class="seg" id="aiLevelSeg">
+            <button type="button" data-level="easy" class="seg-btn">лёгкий</button>
+            <button type="button" data-level="medium" class="seg-btn">средний</button>
+            <button type="button" data-level="hard" class="seg-btn">сильный</button>
+          </div>
+        </div>
+        <p class="mode-hint" id="aiHint">Соперник подумает над броском и сыграет сам.</p>
+      </div>
+
+      <div class="mode-extra" id="onlineOptions" hidden>
+        <label class="field-row">
+          <span class="field-label">Сервер</span>
+          <input class="text-input" id="serverInput" type="text" spellcheck="false" placeholder="127.0.0.1:8001" />
+        </label>
+        <div class="field-row">
+          <span class="field-label">Комната</span>
+          <input class="text-input code-input" id="roomInput" type="text" maxlength="4" spellcheck="false" placeholder="КОД" />
+          <button class="btn ghost small" id="joinRoomBtn" type="button">Войти</button>
+        </div>
+        <button class="btn primary wide" id="createRoomBtn" type="button">Создать комнату</button>
+        <p class="mode-hint" id="onlineHint">Создайте комнату и отправьте другу код или ссылку.</p>
+        <div class="room-box" id="roomBox" hidden>
+          <span class="room-box-label">код комнаты</span>
+          <strong class="room-code" id="roomCode">—</strong>
+          <input class="text-input link-input" id="roomLink" type="text" readonly />
+          <button class="btn ghost small" id="copyLinkBtn" type="button">Скопировать ссылку</button>
+        </div>
+      </div>
+
+      <div class="mode-actions">
+        <button class="btn primary" id="applyMode" type="button">Играть</button>
+        <button class="btn ghost" type="button" data-close>Отмена</button>
+      </div>
+    </div>
+  </div>
+
+  <noscript><p style="padding:20px">Для игры нужен включённый JavaScript.</p></noscript>
+  <script src="game.js"></script>
+</body>
+</html>
